@@ -1,8 +1,20 @@
 using UnityEngine;
 
-public class CounterView
+public class CounterView : MonoBehaviour
 {
-    public void ShowCounter(float count)
+    [SerializeField] private Counter _counter;
+
+    private void OnEnable()
+    {
+        _counter.ChangedCurrentTime += ShowCounter;
+    }
+
+    private void OnDisable()
+    {
+        _counter.ChangedCurrentTime -= ShowCounter;
+    }
+
+    private void ShowCounter(float count)
     {
         Debug.Log($"Текущее время: {count}");
     }
